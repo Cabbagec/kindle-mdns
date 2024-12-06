@@ -1,0 +1,11 @@
+[package]
+name = "kindle-mdns"
+version = "0.1.0"
+edition = "2021"
+keywords = ["kindle", "mdns", "service", "daemon"]
+categories = ["embedded"]
+description = "Kindle mDNS registration daemon"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+mdns-sd = { version = "0.12", default-features = false }
