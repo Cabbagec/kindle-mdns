@@ -8,8 +8,8 @@ start() {
   /usr/sbin/eips 0 32 '                                                               '
   /usr/sbin/eips 11 32 'Starting mDNS...'
 
-  [ -x ${EXTENSION_DIR}/${BIN} ] || chmod +x ${EXTENSION_DIR}/${BIN}
-  output=$(/sbin/start-stop-daemon -v -m -p ${EXTENSION_DIR}/pid -x ${EXTENSION_DIR}/${BIN} -b -c root -S -- kindle)
+  [ -x ${EXTENSION_DIR}/bin/${BIN} ] || chmod +x ${EXTENSION_DIR}/bin/${BIN}
+  output=$(/sbin/start-stop-daemon -v -m -p ${EXTENSION_DIR}/pid -x ${EXTENSION_DIR}/bin/${BIN} -b -c root -S -- kindle)
 
   if [ $? -ne 0 ]; then
     /usr/sbin/eips 0 32 '                                                               '
@@ -25,8 +25,8 @@ stop() {
   /usr/sbin/eips 0 32 '                                                               '
   /usr/sbin/eips 11 32 'Stopping mDNS...'
 
-  [ -x ${EXTENSION_DIR}/${BIN} ] || chmod +x ${EXTENSION_DIR}/${BIN}
-  output=$(/sbin/start-stop-daemon -v -m -p ${EXTENSION_DIR}/pid -x ${EXTENSION_DIR}/${BIN} -b -K)
+  [ -x ${EXTENSION_DIR}/bin/${BIN} ] || chmod +x ${EXTENSION_DIR}/bin/${BIN}
+  output=$(/sbin/start-stop-daemon -v -m -p ${EXTENSION_DIR}/pid -x ${EXTENSION_DIR}/bin/${BIN} -b -K)
 
   if [ $? -ne 0 ]; then
     /usr/sbin/eips 0 32 '                                                               '
