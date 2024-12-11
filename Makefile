@@ -1,13 +1,13 @@
 .PHONY: build pack
+TARGET ?= armv7-unknown-linux-musleabihf
 
 build:
-	cross build --release --target armv7-unknown-linux-musleabihf
+	cross build --release --target $(TARGET)
 
-pack: build
-	rm -rf kindle-mdns.zip
-	cp ./target/armv7-unknown-linux-musleabihf/release/kindle-mdns ./extensions/kindle-mdns/bin/
-	zip -r9 kindle-mdns.zip ./extensions
+pack: clean build
+	cp ./target/$(TARGET)/release/kindle-mdns ./extensions/kindle-mdns/bin/
+	zip -r9 kindle-mdns-$(TARGET).zip ./extensions
 
 clean:
-	cargo clear
-	rm kindle-mdns.zip
+	cargo clean
+	rm -rf kindle-mdns-$(TARGET).zip
