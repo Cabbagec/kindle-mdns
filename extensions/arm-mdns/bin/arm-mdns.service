@@ -1,0 +1,14 @@
+[Unit]
+Description=ARM mDNS Registration Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/arm-mdns device
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

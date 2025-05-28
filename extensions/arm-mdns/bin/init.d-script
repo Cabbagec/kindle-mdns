@@ -1,0 +1,78 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          arm-mdns
+# Required-Start:    $network $remote_fs $syslog
+# Required-Stop:     $network $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: ARM mDNS Registration Service
+# Description:       Service for registering ARM devices on the local network using mDNS
+### END INIT INFO
+
+# Path to the executable
+DAEMON="/usr/local/bin/arm-mdns"
+DAEMON_ARGS="device"
+DAEMON_NAME="arm-mdns"
+PIDFILE="/var/run/$DAEMON_NAME.pid"
+
+# Exit if the package is not installed
+[ -x "$DAEMON" ] || exit 0
+
+# Read configuration if present
+[ -r /etc/default/$DAEMON_NAME ] && . /etc/default/$DAEMON_NAME
+
+# Define LSB log_* functions
+. /lib/lsb/init-functions
+
+# Function to start the daemon
+do_start() {
+    log_daemon_msg "Starting $DAEMON_NAME" "$DAEMON_NAME"
+    start-stop-daemon --start --background --pidfile $PIDFILE --make-pidfile --exec $DAEMON -- $DAEMON_ARGS
+    log_end_msg $?
+}
+
+# Function to stop the daemon
+do_stop() {
+    log_daemon_msg "Stopping $DAEMON_NAME" "$DAEMON_NAME"
+    start-stop-daemon --stop --pidfile $PIDFILE --retry=TERM/30/KILL/5
+    RETVAL=$?
+    [ $RETVAL -eq 0 ] && rm -f $PIDFILE
+    log_end_msg $RETVAL
+    return $RETVAL
+}
+
+# Function to get daemon status
+do_status() {
+    status_of_proc -p $PIDFILE "$DAEMON" "$DAEMON_NAME" && exit 0 || exit $?
+}
+
+# Main case statement
+case "$1" in
+    start)
+        do_start
+        ;;
+    stop)
+        do_stop
+        ;;
+    status)
+        do_status
+        ;;
+    restart|force-reload)
+        do_stop
+        case "$?" in
+            0|1)
+                do_start
+                ;;
+            *)
+                # Failed to stop
+                log_end_msg 1
+                ;;
+        esac
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|status|restart|force-reload}" >&2
+        exit 3
+        ;;
+esac
+
+exit 0
