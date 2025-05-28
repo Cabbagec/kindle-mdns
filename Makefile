@@ -35,8 +35,8 @@ install: pack
 	@echo "5. (Optional) Enable at boot: sudo ./arm-mdns-control.sh enable"
 
 clean:
-	cargo clean
-	rm -rf arm-mdns-$(TARGET).zip
+	-cargo clean || true
+	-rm -rf arm-mdns-$(TARGET).zip || true
 
 clean-docker:
 	-docker rmi arm-mdns-builder:$(TARGET) 2>/dev/null || true
