@@ -1,7 +1,7 @@
 ### kindle-mdns
 
 Simple Zeroconf/mDNS server for your jailbroken kindle. KUAL is required. 
-Currently, this plugin is tested on my KT3.
+This plugin has been tested successfully on KT3 and Kindle Paperwhite 2 (PW2).
 
 #### What does this project do?
 
