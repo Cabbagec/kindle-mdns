@@ -8,4 +8,4 @@ description = "Kindle mDNS registration daemon"
 
 [dependencies]
 clap = { version = "4.5", features = ["derive"] }
-mdns-sd = { version = "0.12", default-features = false }
+mdns-sd = { version = "0.19.2", default-features = false }

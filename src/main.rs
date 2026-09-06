@@ -4,10 +4,12 @@ use std::process::exit;
 
 #[derive(Parser)]
 struct Args {
-    #[arg(short, long, default_value = "_my-hello._tcp")]
+    #[arg(short, long, default_value = "_kindle-service._tcp")]
     service_type: Option<String>,
-    #[arg(short, long, default_value = "instance1")]
+    #[arg(short, long, default_value = "Kindle Service")]
     instance_name: Option<String>,
+    #[arg(short, long, default_value = "0")]
+    port: Option<u16>,
     host_name: String,
     #[arg(long = "disable-ipv6", default_value_t = false)]
     disable_ipv6: bool,
@@ -20,7 +22,7 @@ fn main() {
         args.instance_name.unwrap().as_str(),
         format!("{}.local.", args.host_name).as_str(),
         "",
-        0,
+        args.port.unwrap(),
         None,
     ) else {
         eprintln!("Failed to create ServiceInfo");

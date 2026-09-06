@@ -8,7 +8,8 @@
           "name": "Start",
           "priority": 1,
           "action": "bin/start-stop.sh start",
-          "exitmenu": true
+          "refresh": true,
+          "exitmenu": false
         },
         {
           "name": "Stop",
