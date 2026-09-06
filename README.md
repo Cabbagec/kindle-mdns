@@ -45,6 +45,7 @@ and the triple should be `aarch64-unknown-linux-musl` or `armv7-unknown-linux-mu
 
 #### Note
 
-The default host name is `kindle.local`. you can change it by modifying the `HOST_NAME` variable in `extensions/kindle-mdns/bin/start-stop.sh`.
-
+The default host name is `kindle.local`. You can change it by modifying `HOST_NAME` in
+`extensions/kindle-mdns/kindle-mdns.conf`. Starting the service updates and refreshes
+the KUAL menu so its displayed name matches the configured host name.
 
